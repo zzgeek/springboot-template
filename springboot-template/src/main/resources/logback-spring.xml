@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="20 minutes">
+    <!--<include resource="org/springframework/boot/logging/logback/base.xml" />-->
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="UTF-8">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{100}:%line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.mybatis" level="INFO"/>
+    <logger name="org.hibernate" level="INFO"/>
+    <logger name="org.apache" level="INFO"/>
+    <logger name="org.mongodb" level="INFO"/>
+    <logger name="com.alibaba.dubbo" level="INFO"/>
+
+
+    <appender name="LOGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/zzgeek.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!--<fileNamePattern>./logs/pay-center.%d{yyyy-MM-dd}.log</fileNamePattern>-->
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{ThreadId}] [%thread] [%X{userIP}] %-5level %logger{100}:%line - %msg%n</pattern>
+        </encoder>
+        <prudent>true</prudent>
+    </appender>
+
+    <!-- 异步输出 -->
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+        <queueSize>32768</queueSize>
+        <includeCallerData>false</includeCallerData>
+        <maxFlushTime>5000</maxFlushTime>
+        <neverBlock>true</neverBlock>
+        <!-- 添加附加的appender,最多只能添加一个 -->
+        <appender-ref ref="LOGFILE"/>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="ASYNC"/>
+    </root>
+
+    <logger name="org.springframework" level="ERROR"/>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

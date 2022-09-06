@@ -1,0 +1,65 @@
+#服务器配置
+server:
+  port: 9000
+
+#数据源配置
+spring:
+  #mongo 数据库配置
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  data:
+    mongodb:
+      uri: mongodb://blog:123456@192.168.127.128:27017/blog
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+  datasource:
+    #    url: jdbc:mysql://169.56.12.110:3306/pay_center_db?useUnicode=true&characterEncoding=utf-8
+    #    username: admin
+    #    password: admin@remote
+    #    正式环境
+    #    url: jdbc:mysql://jxpay-cluster.cluster-c6nenbx7rplb.ap-northeast-1.rds.amazonaws.com:3306/pay_center_db?useUnicode=true&characterEncoding=utf-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.127.128:3306/zzgeek?useUnicode=true&characterEncoding=utf-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: zzgeek
+    type: org.apache.commons.dbcp2.BasicDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    dbcp2:
+      #连接初始值，连接池启动时创建的连接数量的初始值  默认值是0
+      initial-size: 5
+      #最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请  默认值是0
+      min-idle: 5
+      #最大空闲值.当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，一直减少到maxIdle为止 ，0时无限制  默认值是8
+      max-idle: 50
+      #可以在这个池中同时被分配的有效连接数的最大值，如设置为负数，则不限制
+      max-total: -1
+      #获取连接等待超时的时间，单位毫秒
+      max-wait-millis: 20000
+      #获取连接时候验证，会影响性能
+      test-on-borrow: false
+      #SQL查询,用来验证从连接池取出的连接,在将连接返回给调用者之前.如果指定,则查询必须是一个SQL SELECT并且必须返回至少一行记录
+      validation-query: SELECT 1
+      #每60秒运行一次空闲连接回收器（默认-1）
+      time-between-eviction-runs-millis: 600000
+      #池中的连接空闲3分钟后被回收（默认30分钟）
+      min-evictable-idle-time-millis: 1800000
+      #在每次空闲连接回收器线程(如果有)运行时检查的连接数量（设置为和maxIdle一样）
+      num-tests-per-eviction-run: 50
+
+#mybatis配置
+mybatis:
+  type-aliases-package: zzgeek.model
+  mapper-locations:
+    - mappers/read/*.xml
+    - mappers/write/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  config: classpath:logback-spring.xml
+
+springfox:
+  swagger2:
+  enabled: true

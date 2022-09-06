@@ -1,0 +1,25 @@
+2022-01-16 12:27:59.728 [] [main] [] INFO  zzgeek.ZzGeekBoot:? - No active profile set, falling back to default profiles: default
+2022-01-16 12:28:00.801 [] [main] [] INFO  org.apache.coyote.http11.Http11NioProtocol:? - Initializing ProtocolHandler ["http-nio-9000"]
+2022-01-16 12:28:00.807 [] [main] [] INFO  org.apache.catalina.core.StandardService:? - Starting service [Tomcat]
+2022-01-16 12:28:00.807 [] [main] [] INFO  org.apache.catalina.core.StandardEngine:? - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2022-01-16 12:28:00.812 [] [main] [] INFO  org.apache.catalina.core.AprLifecycleListener:? - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\program\jdk8\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;D:\program\jdk8\bin;C:\Program Files (x86)\dotnet\;D:\program\git\Git\cmd;D:\program\yarn\bin\;D:\program\python3.10;D:\program\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\mark\AppData\Local\Microsoft\WindowsApps;D:\program\maven\bin;C:\Users\mark\AppData\Local\Yarn\bin;C:\Users\mark\AppData\Roaming\npm;.]
+2022-01-16 12:28:00.908 [] [main] [] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]:? - Initializing Spring embedded WebApplicationContext
+2022-01-16 12:28:01.431 [] [main] [] INFO  org.mongodb.driver.cluster:? - Cluster created with settings {hosts=[192.168.127.128:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2022-01-16 12:28:21.474 [] [cluster-ClusterId{value='61e39ed173d6621d50a2c0d0', description='null'}-192.168.127.128:27017] [] INFO  org.mongodb.driver.cluster:? - Exception in monitor thread while connecting to server 192.168.127.128:27017
+com.mongodb.MongoSocketOpenException: Exception opening socket
+	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:67)
+	at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:126)
+	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:117)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketTimeoutException: connect timed out
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:81)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:476)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:218)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:200)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:162)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:394)
+	at java.net.Socket.connect(Socket.java:606)
+	at com.mongodb.internal.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:64)
+	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:62)
+	... 3 common frames omitted
